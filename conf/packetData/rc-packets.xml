@@ -16,7 +16,7 @@
  with this program. If not, see <http://www.gnu.org/licenses/>.          
 -->
 <opcodes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:noNamespaceSchemaLocation="packets.xsd">
+         xsi:noNamespaceSchemaLocation="../../Realm/conf/packetData/packets.xsd">
     <opcodelist direction="DOWNSTREAM"
                 package="org.jmangos.realm.network.packet.wow.client.">
         <packet name="CMSG_PING" id="1DC" state="AUTHED"/>

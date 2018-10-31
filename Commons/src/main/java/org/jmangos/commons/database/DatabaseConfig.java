@@ -1,16 +1,16 @@
 /*******************************************************************************
  * Copyright (C) 2013 JMaNGOS <http://jmangos.org/>
- * 
+ *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the
  * Free Software Foundation; either version 2 of the License, or (at your
  * option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful, but WITHOUT
  * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
  * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
  * more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  ******************************************************************************/
@@ -22,160 +22,50 @@ import org.springframework.stereotype.Component;
 
 /**
  * This class holds all configuration of database.
- * 
  */
 @Component
 public class DatabaseConfig extends AbstractConfig {
 
-    /** Configuration file location. */
+    /**
+     * Configuration file location.
+     */
     public static final String CONFIG_FILE = "conf/database/database.properties";
+
+    private static final String DEFAULT_CONNECTION = "jdbc:postgresql://localhost:5432/tc";
+    private static final String DEFAULT_USERNAME = "postgres";
+    private static final String DEFAULT_PASS = "postgres";
 
     /**
      * Default world driver class to database
      */
-    @Property(key = "world.database.driver", defaultValue = "com.mysql.jdbc.Driver")
-    public String WORLD_DATABASE_DRIVER;
+    @Property(key = "world.database.driver", defaultValue = "org.postgresql.Driver")
+    public String DB_DRIVER;
 
     /**
      * World database uri !!!with trailing slash!!!
      */
-    @Property(key = "world.database.url", defaultValue = "jdbc:mysql://localhost:3306/")
-    public String WORLD_DATABASE_URL;
+    @Property(key = "world.database.url", defaultValue = DEFAULT_CONNECTION)
+    public String DB_CONN_STRING;
 
     /**
      * World Database Hibernate dialect (see http://hibernate.org)
      */
-    @Property(key = "world.database.dialect", defaultValue = "org.hibernate.dialect.MySQL5Dialect")
-    public String WORLD_DATABASE_DIALECT;
+    @Property(key = "world.database.dialect", defaultValue = "org.hibernate.dialect.PostgreSQLDialect")
+    public String DB_DIALECT;
 
     /**
      * World Database user
      */
-    @Property(key = "world.database.user", defaultValue = "JMaNGOS")
-    public String WORLD_DATABASE_USER;
+    @Property(key = "world.database.user", defaultValue = DEFAULT_USERNAME)
+    public String DB_USER;
 
     /**
      * World Database password
      */
-    @Property(key = "world.database.password", defaultValue = "JMaNGOS")
-    public String WORLD_DATABASE_PASSWORD;
+    @Property(key = "world.database.password", defaultValue = DEFAULT_PASS)
+    public String DB_PASS;
 
-    /**
-     * World Database name
-     */
-    @Property(key = "world.database.name", defaultValue = "world")
-    public String WORLD_DATABASE_NAME;
 
-    /**
-     * World Minimum amount of database connections
-     */
-    @Property(key = "world.database.connections.min", defaultValue = "5")
-    public Integer WORLD_DATABASE_CONNECTIONS_MIN;
-
-    /**
-     * World Maximum amount of database connections
-     */
-    @Property(key = "world.database.connections.max", defaultValue = "10")
-    public Integer WORLD_DATABASE_CONNECTIONS_MAX;
-
-    /**************************** -- CHARACTER -- ******************************/
-    /**
-     * Default chars driver class to database
-     */
-    @Property(key = "chars.database.driver", defaultValue = "com.mysql.jdbc.Driver")
-    public String CHARS_DATABASE_DRIVER;
-
-    /**
-     * Characters database uri !!!with trailing slash!!!
-     */
-    @Property(key = "chars.database.url", defaultValue = "jdbc:mysql://localhost:3306/")
-    public String CHARS_DATABASE_URL;
-
-    /**
-     * Characters Database Hibernate dialect (see http://hibernate.org)
-     */
-    @Property(key = "chars.database.dialect", defaultValue = "org.hibernate.dialect.MySQL5Dialect")
-    public String CHARS_DATABASE_DIALECT;
-
-    /**
-     * Characters Database user
-     */
-    @Property(key = "chars.database.user", defaultValue = "JMaNGOS")
-    public String CHARS_DATABASE_USER;
-
-    /**
-     * Characters Database password
-     */
-    @Property(key = "chars.database.password", defaultValue = "JMaNGOS")
-    public String CHARS_DATABASE_PASSWORD;
-
-    /**
-     * Characters Database name
-     */
-    @Property(key = "chars.database.name", defaultValue = "characters")
-    public String CHARS_DATABASE_NAME;
-
-    /**
-     * Characters Minimum amount of database connections
-     */
-    @Property(key = "chars.database.connections.min", defaultValue = "5")
-    public Integer CHARS_DATABASE_CONNECTIONS_MIN;
-
-    /**
-     * Characters Maximum amount of database connections
-     */
-    @Property(key = "chars.database.connections.max", defaultValue = "10")
-    public Integer CHARS_DATABASE_CONNECTIONS_MAX;
-
-    /**************************** -- ACCOUNT -- ******************************/
-    /**
-     * Default chars driver class to database
-     */
-    @Property(key = "account.database.driver", defaultValue = "com.mysql.jdbc.Driver")
-    public String ACCOUNT_DATABASE_DRIVER;
-
-    /**
-     * Account database uri !!!with trailing slash!!!
-     */
-    @Property(key = "account.database.url", defaultValue = "jdbc:mysql://localhost:3306/")
-    public String ACCOUNT_DATABASE_URL;
-
-    /**
-     * Characters Database Hibernate dialect (see http://hibernate.org)
-     */
-    @Property(key = "account.database.dialect",
-            defaultValue = "org.hibernate.dialect.MySQL5Dialect")
-    public String ACCOUNT_DATABASE_DIALECT;
-
-    /**
-     * Characters Database user
-     */
-    @Property(key = "account.database.user", defaultValue = "JMaNGOS")
-    public String ACCOUNT_DATABASE_USER;
-
-    /**
-     * Characters Database password
-     */
-    @Property(key = "account.database.password", defaultValue = "JMaNGOS")
-    public String ACCOUNT_DATABASE_PASSWORD;
-
-    /**
-     * Characters Database name
-     */
-    @Property(key = "account.database.name", defaultValue = "accounts")
-    public String ACCOUNT_DATABASE_NAME;
-
-    /**
-     * Characters Minimum amount of database connections
-     */
-    @Property(key = "account.database.connections.min", defaultValue = "5")
-    public Integer ACCOUNT_DATABASE_CONNECTIONS_MIN;
-
-    /**
-     * Characters Maximum amount of database connections
-     */
-    @Property(key = "account.database.connections.max", defaultValue = "10")
-    public Integer ACCOUNT_DATABASE_CONNECTIONS_MAX;
 
     public DatabaseConfig() {
 

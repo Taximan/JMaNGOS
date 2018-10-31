@@ -29,7 +29,7 @@ import org.jmangos.commons.entities.CharacterSkill;
  * 
  */
 @Entity
-@DiscriminatorValue(value = "768")
+@DiscriminatorValue(value = "3168")
 public class PetRavager extends CharacterSkill {
 
     /**

@@ -16,10 +16,7 @@
  ******************************************************************************/
 package org.jmangos.realm.module;
 
-import java.beans.PropertyVetoException;
-
-import javax.sql.DataSource;
-
+import com.zaxxer.hikari.HikariDataSource;
 import org.jmangos.commons.database.DatabaseConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,7 +33,7 @@ import org.springframework.transaction.annotation.AnnotationTransactionAttribute
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.transaction.interceptor.TransactionInterceptor;
 
-import com.mchange.v2.c3p0.ComboPooledDataSource;
+import javax.sql.DataSource;
 
 @Configuration
 @ComponentScan
@@ -52,33 +49,20 @@ public class WorldModule {
 
     @Bean
     public DataSource dataSourceWorld() {
-
-        final ComboPooledDataSource ds = new ComboPooledDataSource();
-        try {
-            ds.setDriverClass(this.databaseConfig.WORLD_DATABASE_DRIVER);
-            ds.setJdbcUrl(this.databaseConfig.WORLD_DATABASE_URL +
-                this.databaseConfig.WORLD_DATABASE_NAME +
-                "?autoReconnect=true");
-            ds.setUser(this.databaseConfig.WORLD_DATABASE_USER);
-            ds.setPassword(this.databaseConfig.WORLD_DATABASE_PASSWORD);
-
-            ds.setMinPoolSize(this.databaseConfig.WORLD_DATABASE_CONNECTIONS_MIN);
-            ds.setMaxPoolSize(this.databaseConfig.WORLD_DATABASE_CONNECTIONS_MAX);
-            ds.setAutoCommitOnClose(false);
-        } catch (final PropertyVetoException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        final HikariDataSource ds = new HikariDataSource();
+        ds.setDriverClassName(databaseConfig.DB_DRIVER);
+        ds.setJdbcUrl(databaseConfig.DB_CONN_STRING);
+        ds.setUsername(databaseConfig.DB_USER);
+        ds.setPassword(databaseConfig.DB_PASS);
         return ds;
     }
 
     @Bean
     public JpaVendorAdapter jpaVendorAdapterWorld() {
-
         final HibernateJpaVendorAdapter hjva = new HibernateJpaVendorAdapter();
         hjva.setShowSql(false);
         hjva.setGenerateDdl(true);
-        hjva.setDatabasePlatform(this.databaseConfig.WORLD_DATABASE_DIALECT);
+        hjva.setDatabasePlatform(this.databaseConfig.DB_DIALECT);
         return hjva;
     }
 

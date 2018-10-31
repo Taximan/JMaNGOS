@@ -20,6 +20,7 @@ import java.beans.PropertyVetoException;
 
 import javax.sql.DataSource;
 
+import com.zaxxer.hikari.HikariDataSource;
 import org.jmangos.commons.database.DatabaseConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -52,33 +53,20 @@ public class RealmModule {
 
     @Bean
     public DataSource dataSourceRealm() {
-
-        final ComboPooledDataSource ds = new ComboPooledDataSource();
-        try {
-            ds.setDriverClass(this.databaseConfig.CHARS_DATABASE_DIALECT);
-            ds.setJdbcUrl(this.databaseConfig.CHARS_DATABASE_URL +
-                this.databaseConfig.CHARS_DATABASE_NAME +
-                "?autoReconnect=true");
-            ds.setUser(this.databaseConfig.CHARS_DATABASE_USER);
-            ds.setPassword(this.databaseConfig.CHARS_DATABASE_PASSWORD);
-
-            ds.setMinPoolSize(this.databaseConfig.CHARS_DATABASE_CONNECTIONS_MIN);
-            ds.setMaxPoolSize(this.databaseConfig.CHARS_DATABASE_CONNECTIONS_MAX);
-            ds.setAutoCommitOnClose(false);
-        } catch (final PropertyVetoException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+        final HikariDataSource ds = new HikariDataSource();
+        ds.setDriverClassName(databaseConfig.DB_DRIVER);
+        ds.setJdbcUrl(databaseConfig.DB_CONN_STRING);
+        ds.setUsername(databaseConfig.DB_USER);
+        ds.setPassword(databaseConfig.DB_PASS);
         return ds;
     }
 
     @Bean
     public JpaVendorAdapter jpaVendorAdapterRealm() {
-
         final HibernateJpaVendorAdapter hjva = new HibernateJpaVendorAdapter();
-        hjva.setShowSql(false);
+        hjva.setShowSql(true);
         hjva.setGenerateDdl(true);
-        hjva.setDatabasePlatform(this.databaseConfig.CHARS_DATABASE_DIALECT);
+        hjva.setDatabasePlatform(this.databaseConfig.DB_DIALECT);
         return hjva;
     }
 

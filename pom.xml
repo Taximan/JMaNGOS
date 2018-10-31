@@ -139,18 +139,25 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
-				<version>4.2.1.Final</version>
+				<version>4.3.11.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-c3p0</artifactId>
-				<version>4.2.1.Final</version>
+				<version>4.3.11.Final</version>
 			</dependency>
-			<!--dependency>
+			<!-- https://mvnrepository.com/artifact/org.apache.tomcat/tomcat-jdbc -->
+			<dependency>
 				<groupId>org.criteria4jpa</groupId>
 				<artifactId>criteria4jpa</artifactId>
 				<version>0.2</version>
-			</dependency -->
+			</dependency>
+			<dependency>
+				<groupId>com.zaxxer</groupId>
+				<artifactId>HikariCP-java7</artifactId>
+				<version>2.4.13</version>
+				<scope>compile</scope>
+			</dependency>
 			<dependency>
 				<groupId>javassist</groupId>
 				<artifactId>javassist</artifactId>
@@ -247,12 +254,17 @@
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-core</artifactId>
-				<version>4.2.1.Final</version>
+				<version>4.3.11.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>42.2.5.jre7</version>
 			</dependency>
 			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-ehcache</artifactId>
-				<version>4.2.1.Final</version>
+				<version>4.3.11.Final</version>
 			</dependency>
 			<dependency>
 				<groupId>
